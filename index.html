@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Priyanshi</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, pink, violet);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .button-container {
+            position: relative;
+            text-align: center;
+        }
+
+        .heart-shower {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            display: none;
+        }
+
+        .heart {
+            font-size: 30px;
+            position: absolute;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        #loveMessage {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+            opacity: 0;
+            animation: messagePop 5s ease-in-out forwards;
+        }
+
+        @keyframes messagePop {
+            0% {
+                opacity: 0;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1.2);
+            }
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        button.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button id="loveButton" style="border-radius: 20px;" onclick="startHearts()">Click Me my darling Priyanshi ❤️</button>
+        <div id="loveMessage">I love you my darling!<br> Please khush hoja ❤️<br> Sorry agar mere karan kuch bura laga ho abhi.</div>
+    </div>
+    
+    <div class="heart-shower" id="heartContainer"></div>
+
+    <script>
+        function startHearts() {
+            const heartContainer = document.getElementById('heartContainer');
+            const loveMessage = document.getElementById('loveMessage');
+            const loveButton = document.getElementById('loveButton');
+            
+            // Hide button after clicking
+            loveButton.classList.add('hidden');
+
+            heartContainer.innerHTML = ''; // Clear any previous hearts
+            heartContainer.style.display = 'block';
+            
+            // Create hearts
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * -100}vh`; // Start hearts above the screen
+                heart.style.animationDuration = `${Math.random() * 2 + 3}s`; // Randomize fall speed
+                heartContainer.appendChild(heart);
+            }
+            
+            // Show hearts for 5 seconds, then display message
+            setTimeout(() => {
+                heartContainer.style.display = 'none';
+                loveMessage.style.display = 'block';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
